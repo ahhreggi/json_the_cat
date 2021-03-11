@@ -6,7 +6,12 @@ const fetchBreedDescription = (breedName, callback) => {
     if (error) {
       callback("Request failed!", null);
     } else {
-      callback(null, JSON.parse(body));
+      const data = JSON.parse(body);
+      if (data.length > 0) {
+        callback(null, data[0].description);
+      } else {
+        callback("Breed not found!", null);
+      }
     }
   });
 };
